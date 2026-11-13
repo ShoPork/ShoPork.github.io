@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Lucky Breaks icon</title></head>
+<body style="background:#0f1026;color:#eef0ff;font-family:sans-serif">
+<p>Sending the Lucky Breaks icon to the page that opened this one…</p>
+<script>
+  // Helper for uploading the app icon to another site: sends the image to the opener, then closes.
+  fetch('/lucky-breaks/icon.png').then(r => r.blob()).then(blob => {
+    if (window.opener) window.opener.postMessage({ type: 'lucky-breaks-icon', blob }, '*');
+    setTimeout(() => window.close(), 500);
+  });
+</script>
+</body></html>

@@ -5,7 +5,8 @@
 <script>
   // Helper for uploading the app icon to another site: sends the image to the opener, then closes.
   fetch('/lucky-breaks/icon.png').then(r => r.blob()).then(blob => {
-    if (window.opener) window.opener.postMessage({ type: 'lucky-breaks-icon', blob }, '*');
+    const target = window.opener || (window.parent !== window ? window.parent : null);
+    if (target) target.postMessage({ type: 'lucky-breaks-icon', blob }, '*');
     setTimeout(() => window.close(), 500);
   });
 </script>
